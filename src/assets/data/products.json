@@ -1,0 +1,157 @@
+[
+  {
+    "id": 1,
+    "name": "All Dips Combo",
+    "img": "all-dips.png",
+    "price": 19.99,
+    "detail": {
+      "calories": 1543,
+      "ingredients": [
+        "Pigs in blanket",
+        "Pizza",
+        "Fries",
+        "Peanuts",
+        "Pop corn",
+        "Doritos",
+        "Onion rings",
+        "Coke"
+      ]
+    }
+  },
+  {
+    "id": 2,
+    "name": "Burger",
+    "img": "burger.png",
+    "price": 7.99,
+    "detail": {
+      "calories": 823,
+      "ingredients": [
+        "Bread",
+        "Meat",
+        "Potatoes",
+        "Coke",
+        "Letuce",
+        "Tomato",
+        "Egg",
+        "Cheese"
+      ]
+    }
+  },
+  {
+    "id": 3,
+    "name": "Cobb Salad",
+    "img": "cobb-salad.png",
+    "price": 7.99,
+    "detail": {
+      "calories": 345,
+      "ingredients": [
+        "Letuce",
+        "Onions",
+        "Bacon",
+        "Egg",
+        "Tomato"
+      ]
+    }
+  },
+  {
+    "id": 4,
+    "name": "Croque Madame",
+    "img": "croque-madame.png",
+    "price": 6.99,
+    "detail": {
+      "calories": 234,
+      "ingredients": [
+        "Bread",
+        "Ham",
+        "Cheese",
+        "Mayo",
+        "Onions",
+        "Green peppers"
+      ]
+    }
+  },
+  {
+    "id": 5,
+    "name": "Hot Dog",
+    "img": "hotdog.png",
+    "price": 3.99,
+    "detail": {
+      "calories": 453,
+      "ingredients": [
+        "Sausage",
+        "Mustard",
+        "Bread",
+        "Letuce",
+        "Onions",
+        "Mayo"
+      ]
+    }
+  },
+  {
+    "id": 6,
+    "name": "Mafalda",
+    "img": "mafalda.png",
+    "price": 3.99,
+    "detail": {
+      "calories": 265,
+      "ingredients": [
+        "Sweet Croissant",
+        "Ham",
+        "Cheese",
+        "Tomato",
+        "Letuce"
+      ]
+    }
+  },
+  {
+    "id": 7,
+    "name": "Pizza",
+    "img": "pizza.png",
+    "price": 8.99,
+    "detail": {
+      "calories": 768,
+      "ingredients": [
+        "Bread",
+        "Cheese",
+        "Bacon",
+        "Tomato",
+        "Green Beans"
+      ]
+    }
+  },
+  {
+    "id": 8,
+    "name": "Premium Burger",
+    "img": "premium-burger.png",
+    "price": 9.99,
+    "detail": {
+      "calories": 845,
+      "ingredients": [
+        "Bread",
+        "Premium beef burger",
+        "Ham",
+        "Cheese",
+        "Letuce",
+        "Tomato",
+        "Bacon",
+        "Rustic fries"
+      ]
+    }
+  },
+  {
+    "id": 9,
+    "name": "Sushi",
+    "img": "sushi.png",
+    "price": 14.99,
+    "detail": {
+      "calories": 860,
+      "ingredients": [
+        "Rice",
+        "Salmon",
+        "Tuna fish",
+        "Wasabi",
+        "Soya sauce"
+      ]
+    }
+  }
+]
