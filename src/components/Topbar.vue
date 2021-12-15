@@ -1,6 +1,6 @@
 <template>
   <b-navbar sticky toggleable="lg" type="light" variant="light">
-    <b-navbar-brand href="#">EasyFood</b-navbar-brand>
+    <b-navbar-brand to="/">EasyFood</b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -12,13 +12,21 @@
 
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
-        <b-nav-item v-if="cart" @click="showCart">Cart</b-nav-item>
+        <b-nav-item to="/home">Home</b-nav-item>
+        <b-nav-item to="/cart"
+          >My cart
+          <b-badge v-show="cartCount">{{ cartCount }}</b-badge></b-nav-item
+        >
+        <b-nav-item to="/orders">My orders</b-nav-item>
         <b-nav-item-dropdown right>
           <!-- Using 'button-content' slot -->
 
           <template #button-content>
             <em>{{ profile.name }}</em>
           </template>
+          <b-dropdown-item v-if="profile.role === 'ADMIN'" to="/admin"
+            >Settings</b-dropdown-item
+          >
           <b-dropdown-item @click="closeSession">Sign Out</b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
@@ -27,19 +35,33 @@
 </template>
 
 <script>
-import EventBus from "@/services/EventBus";
+//import EventBus from "@/services/EventBus";
+//import Storage from "@/services/Storage";
 
 export default {
   props: {
-    profile: { type: Object, default: null },
-    cart: { type: Array, default: null },
+    //profile: { type: Object, default: null },
+  },
+  computed: {
+    cartCount() {
+      const cart = this.$store.state.cart;
+      if (cart && cart.products && cart.products.length > 0) {
+        let total = 0;
+        for (const prod of cart.products) {
+          total += prod.quantity;
+        }
+        return total;
+      }
+      return null;
+    },
+    profile() {
+      return this.$store.state.profile;
+    },
   },
   methods: {
     closeSession() {
-      EventBus.$emit("logout");
-    },
-    showCart() {
-      EventBus.$emit("show-cart");
+      this.$store.commit("logout");
+      this.$router.push("/");
     },
   },
 };

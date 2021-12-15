@@ -10,8 +10,6 @@
 </template>
 
 <script>
-import products from "@/assets/data/products.json";
-
 import CatalogItem from "@/components/CatalogItem.vue";
 
 export default {
@@ -19,8 +17,13 @@ export default {
   components: {
     CatalogItem,
   },
-  data() {
-    return { products };
+  computed: {
+    products() {
+      return this.$store.state.products;
+    },
+  },
+  async beforeMount() {
+    await this.$store.dispatch("getProducts");
   },
 };
 </script>

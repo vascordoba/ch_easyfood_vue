@@ -61,46 +61,51 @@
 </template>
 
 <script>
-import EventBus from "@/services/EventBus";
-
 export default {
   data() {
     return {
       login: { email: "", password: "" },
       register: { name: "", email: "", password: "" },
-      showLogin: true,
     };
   },
+  computed: {
+    loginMsg() {
+      return this.$store.state.userLoginResult;
+    },
+    registrationMsg() {
+      return this.$store.state.userRegistrationResult;
+    },
+    showLogin() {
+      return this.$store.state.showLogin;
+    },
+  },
   methods: {
-    onLogin() {
+    async onLogin() {
       if (this.login.email == "") {
         alert("Email is required");
-      } else if (this.login.passwrd == "") {
+      } else if (this.login.password == "") {
         alert("Password is required");
       } else {
-        EventBus.$emit("login-user", this.login);
+        await this.$store.dispatch("login", this.login);
       }
     },
-    onRegister() {
+    async onRegister() {
       if (this.register.name == "") {
         alert("Name is required");
       } else if (this.register.email == "") {
         alert("Email is required");
-      } else if (this.register.passwrd == "") {
+      } else if (this.register.password == "") {
         alert("Password is required");
       } else {
-        EventBus.$emit("register-user", this.register);
-        alert("User successfully registered");
-        this.showLogin = true;
-        this.clearForms();
+        await this.$store.dispatch("register", this.register);
       }
     },
     onShowRegister() {
-      this.showLogin = false;
+      this.$store.commit("toggleLogin");
       this.clearForms();
     },
     onShowLogin() {
-      this.showLogin = true;
+      this.$store.commit("toggleLogin");
       this.clearForms();
     },
     clearForms() {

@@ -5,7 +5,7 @@
     :img-alt="product.name"
     img-top
     tag="article"
-    style="min-width: 15rem; min-height: 25rem"
+    style="min-width: 20rem; min-height: 25rem; max-width: 24rem"
     class="mb-2"
   >
     <b-card-text> Price: ${{ product.price }} </b-card-text>

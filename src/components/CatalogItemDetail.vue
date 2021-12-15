@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import EventBus from "@/services/EventBus";
+//import EventBus from "@/services/EventBus";
 
 export default {
   props: {
@@ -49,8 +49,12 @@ export default {
     },
   },
   methods: {
-    onAddOneToCart() {
-      EventBus.$emit("add-to-cart", this.product);
+    async onAddOneToCart() {
+      await this.$store.dispatch("addToCart", this.product);
+      await this.$store.dispatch("syncUserCart", {
+        email: this.$store.state.profile.email,
+        cart: this.$store.state.cart,
+      });
       this.showAlert();
     },
     countDownChanged(dismissCountDown) {

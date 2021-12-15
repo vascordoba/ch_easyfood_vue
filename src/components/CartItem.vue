@@ -10,15 +10,9 @@
 </template>
 
 <script>
-import EventBus from "@/services/EventBus";
-
 export default {
   props: { product: { type: Object, default: null } },
-  methods: {
-    onAddOneToCart() {
-      EventBus.$emit("addToCart", this.product);
-    },
-  },
+  methods: {},
 };
 </script>
 
