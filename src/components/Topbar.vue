@@ -35,32 +35,16 @@
 </template>
 
 <script>
-//import EventBus from "@/services/EventBus";
-//import Storage from "@/services/Storage";
+import { mapGetters } from "vuex";
 
 export default {
-  props: {
-    //profile: { type: Object, default: null },
-  },
   computed: {
-    cartCount() {
-      const cart = this.$store.state.cart;
-      if (cart && cart.products && cart.products.length > 0) {
-        let total = 0;
-        for (const prod of cart.products) {
-          total += prod.quantity;
-        }
-        return total;
-      }
-      return null;
-    },
-    profile() {
-      return this.$store.state.profile;
-    },
+    ...mapGetters("auth", { profile: "getProfile" }),
+    ...mapGetters("cart", { cartCount: "getCartCount" }),
   },
   methods: {
     closeSession() {
-      this.$store.commit("logout");
+      this.$store.commit("auth/LOGOUT");
       this.$router.push("/");
     },
   },

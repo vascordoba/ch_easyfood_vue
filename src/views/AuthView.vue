@@ -14,9 +14,6 @@
 import Login from "@/components/Login.vue";
 export default {
   name: "AuthView",
-  props: {
-    profile: { type: Object, default: null },
-  },
   components: {
     Login,
   },

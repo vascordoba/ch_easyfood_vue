@@ -15,9 +15,6 @@ import Cart from "@/components/Cart.vue";
 
 export default {
   name: "CartView",
-  props: {
-    profile: { type: Object, default: null },
-  },
   components: {
     Cart,
   },

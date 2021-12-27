@@ -31,7 +31,7 @@
 </template>
 
 <script>
-//import EventBus from "@/services/EventBus";
+import { mapGetters } from "vuex";
 
 export default {
   props: {
@@ -44,16 +44,18 @@ export default {
     };
   },
   computed: {
+    ...mapGetters("auth", { profile: "getProfile" }),
+    ...mapGetters("cart", { cart: "getCart" }),
     imgUrl() {
       return require("@/assets/imgs/" + this.product.img);
     },
   },
   methods: {
     async onAddOneToCart() {
-      await this.$store.dispatch("addToCart", this.product);
-      await this.$store.dispatch("syncUserCart", {
-        email: this.$store.state.profile.email,
-        cart: this.$store.state.cart,
+      await this.$store.dispatch("cart/addToCart", this.product);
+      await this.$store.dispatch("cart/syncUserCart", {
+        email: this.profile.email,
+        cart: this.cart,
       });
       this.showAlert();
     },

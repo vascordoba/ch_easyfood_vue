@@ -15,16 +15,16 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import OrderItem from "./OrderItem.vue";
 export default {
   components: { OrderItem },
   beforeMount() {
-    this.$store.dispatch("getOrders");
+    this.$store.dispatch("cart/obtainOrders", this.profile.id);
   },
   computed: {
-    orders() {
-      return this.$store.state.orders;
-    },
+    ...mapGetters("cart", { orders: "getOrders" }),
+    ...mapGetters("auth", { profile: "getProfile" }),
   },
 };
 </script>

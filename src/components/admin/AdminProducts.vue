@@ -116,6 +116,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   data() {
     return {
@@ -141,9 +143,7 @@ export default {
     };
   },
   computed: {
-    products() {
-      return this.$store.state.products;
-    },
+    ...mapGetters("adminProducts", { products: "getProducts" }),
     validateForm() {
       return (
         this.validateName &&
@@ -198,7 +198,7 @@ export default {
         for (let ingredient of ingredients) {
           newProduct.detail.ingredients.push(ingredient.trim());
         }
-        this.$store.dispatch("saveNewProduct", newProduct);
+        this.$store.dispatch("adminProducts/saveNewProduct", newProduct);
         if (this.selectedProductId !== null) {
           alert("Product updated!");
         } else {
@@ -232,7 +232,7 @@ export default {
     },
     removeProduct(id) {
       if (confirm("Are you sure to remove th product with ID " + id + "?")) {
-        this.$store.dispatch("removeProduct", id);
+        this.$store.dispatch("adminProducts/removeProduct", id);
         alert("Product deleted!");
       }
     },

@@ -2,7 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 //import Storage from "@/services/Storage";
 //import Api from "@/plugins/api";
-import store from "@/services/Store";
+import store from "@/services/store/Store";
 import router from "@/services/Router";
 
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
@@ -20,8 +20,8 @@ Vue.config.productionTip = false;
 
 //to control navigation to login when authenticated or to any other route without a session
 router.beforeEach((to, from, next) => {
-  if ((to.name !== "auth" || to.path !== "/") && !store.state.profile) next("/");
-  else if ((to.name === "auth" || to.path === "/") && store.state.profile) next("/home");
+  if ((to.name !== "auth" || to.path !== "/") && !store.state.auth.profile) next("/");
+  else if ((to.name === "auth" || to.path === "/") && store.state.auth.profile) next("/home");
   else next();
 });
 //adding api plugin

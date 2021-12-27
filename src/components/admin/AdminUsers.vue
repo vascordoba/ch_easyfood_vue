@@ -38,6 +38,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   data() {
     return {
@@ -50,12 +52,10 @@ export default {
     };
   },
   beforeMount() {
-    this.$store.dispatch("getUsers");
+    this.$store.dispatch("adminUsers/obtainUsers");
   },
   computed: {
-    users() {
-      return this.$store.state.users;
-    },
+    ...mapGetters("adminUsers", { users: "getUsers" }),
   },
 };
 </script>

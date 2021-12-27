@@ -15,9 +15,6 @@ import Catalog from "@/components/Catalog.vue";
 
 export default {
   name: "HomeView",
-  props: {
-    profile: { type: Object, default: null },
-  },
   components: {
     Catalog,
   },

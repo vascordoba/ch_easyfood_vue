@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import CatalogItem from "@/components/CatalogItem.vue";
 
 export default {
@@ -18,12 +19,10 @@ export default {
     CatalogItem,
   },
   computed: {
-    products() {
-      return this.$store.state.products;
-    },
+    ...mapGetters("adminProducts", { products: "getProducts" }),
   },
   async beforeMount() {
-    await this.$store.dispatch("getProducts");
+    await this.$store.dispatch("adminProducts/obtainProducts");
   },
 };
 </script>

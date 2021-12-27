@@ -25,21 +25,16 @@
 </template>
 
 <script>
-//import Storage from "@/services/Storage";
+import { mapGetters } from "vuex";
 import CartItem from "./CartItem.vue";
+
 export default {
   components: { CartItem },
   computed: {
-    cartProducts() {
-      return this.$store.state.cart;
-    },
-    cartTotal() {
-      let total = 0.0;
-      for (const p of this.cartProducts.products) {
-        total += parseFloat(p.quantity * p.price);
-      }
-      return total;
-    },
+    ...mapGetters("cart", {
+      cartProducts: "getCart",
+      cartTotal: "getCartTotal",
+    }),
   },
 };
 </script>

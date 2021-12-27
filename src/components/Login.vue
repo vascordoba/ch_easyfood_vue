@@ -18,8 +18,14 @@
           required
         ></b-form-input>
       </b-form-group>
-      <b-button type="submit" variant="primary">Login</b-button>
-      <b-button type="button" variant="info" @click.prevent="onShowRegister"
+      <b-button type="submit" variant="primary" :disabled="isLoginIn">
+        <b-spinner small v-show="isLoginIn" />Login
+      </b-button>
+      <b-button
+        type="button"
+        variant="info"
+        :disabled="isLoginIn"
+        @click.prevent="onShowRegister"
         >Register</b-button
       >
     </b-form>
@@ -52,8 +58,14 @@
           required
         ></b-form-input>
       </b-form-group>
-      <b-button type="submit" variant="primary">Register</b-button>
-      <b-button type="button" variant="info" @click.prevent="onShowLogin"
+      <b-button type="submit" variant="primary" :disabled="isRegisterIn">
+        <b-spinner small v-show="isRegisterIn" />Register
+      </b-button>
+      <b-button
+        type="button"
+        variant="info"
+        :disabled="isRegisterIn"
+        @click.prevent="onShowLogin"
         >Go to Login</b-button
       >
     </b-form>
@@ -61,23 +73,22 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
       login: { email: "", password: "" },
       register: { name: "", email: "", password: "" },
+      isLoginIn: false,
+      isRegisterIn: false,
     };
   },
   computed: {
-    loginMsg() {
-      return this.$store.state.userLoginResult;
-    },
-    registrationMsg() {
-      return this.$store.state.userRegistrationResult;
-    },
-    showLogin() {
-      return this.$store.state.showLogin;
-    },
+    ...mapGetters("auth", {
+      loginMsg: "getLoginResult",
+      registrationMsg: "getRegistrationResult",
+      showLogin: "isShowLogin",
+    }),
   },
   methods: {
     async onLogin() {
@@ -86,7 +97,13 @@ export default {
       } else if (this.login.password == "") {
         alert("Password is required");
       } else {
-        await this.$store.dispatch("login", this.login);
+        this.isLoginIn = true;
+        await this.$store.dispatch("auth/login", this.login);
+        if (this.loginMsg !== null) {
+          alert(this.loginMsg);
+          this.$store.commit("auth/SET_LOGIN_RESULT", null);
+        }
+        this.isLoginIn = false;
       }
     },
     async onRegister() {
@@ -97,15 +114,21 @@ export default {
       } else if (this.register.password == "") {
         alert("Password is required");
       } else {
-        await this.$store.dispatch("register", this.register);
+        this.isRegisterIn = true;
+        await this.$store.dispatch("auth/register", this.register);
+        if (this.registrationMsg !== null) {
+          alert(this.registrationMsg);
+          this.$store.commit("auth/SET_REGISTRATION_RESULT", null);
+        }
+        this.isRegisterIn = false;
       }
     },
     onShowRegister() {
-      this.$store.commit("toggleLogin");
+      this.$store.commit("auth/TOGGLE_LOGIN");
       this.clearForms();
     },
     onShowLogin() {
-      this.$store.commit("toggleLogin");
+      this.$store.commit("auth/TOGGLE_LOGIN");
       this.clearForms();
     },
     clearForms() {

@@ -7,7 +7,7 @@
 
 <script>
 import Topbar from "@/components/Topbar";
-
+import { mapGetters } from "vuex";
 export default {
   name: "App",
   components: {
@@ -18,8 +18,11 @@ export default {
       profile: null,
     };
   },
+  computed: {
+    ...mapGetters("auth", ["getProfile"]),
+  },
   created() {
-    this.profile = this.$store.state.profile;
+    this.profile = this.getProfile;
   },
 };
 </script>
